@@ -59,6 +59,7 @@ Wybrałem zbiór danych GSM8K ponieważ, jest on chyba najpopularniejszym benchm
 
 **Parsowanie odpowiedzi** - duzo czasu spedzalem na debug'owaniu dlaczego accuracy byl nizszy niz oczekiwalem. Okazalo sie ze porownanie stringow '4' != '4.0' dawalo falszywe negatywy. Naprawilem to normalizujac obie wartosci przez float. Dodatkowo trzeba było dodać całkiem skomplikowaną funkcje do szukania odpowiedzi
 
+```python
 def extract_number(text):
 
 match = re.search(r"\[Ff\]inal\\s+answer\\s\*\[:\\-\]?\\s\*(\[\\d,\\.\]+)", text)
@@ -76,6 +77,7 @@ if all_numbers:
 return all_numbers\[-1\].replace(",", "")
 
 return None
+```
 
 Osobiście nie wpadłbym na taki pomysł, więc z tym problemem pomógł mi Gemini, ja dość prymitywnie na początku jedynie szukałem liczby od końca co nie było dobrym pomysłem.
 
@@ -101,9 +103,11 @@ Kategoria 'comparison' osiagnęła 100% accuracy (6/6), co potwierdziło że ded
 Tabela 2. Porownanie wszystkich strategii na 100 zadaniach GSM8K
 
 ![](test_time_compute.png)
+<br>
 Wykres 1. Porównanie strategii test-time compute
 
 ![](acc_vs_time.png)
+<br>
 Wykres 2. Dokładność vs Czas obliczeń
 
 ## Throughput (tokeny na sekunde)
